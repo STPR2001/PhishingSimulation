@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Empresa = require("../models/empresa");
 const Usuario = require("../models/empresa");
+const nodemailer = require("nodemailer");
 
 // Crear una nueva empresa
 exports.createEmpresa = async (req, res) => {
@@ -94,5 +95,37 @@ exports.deleteEmpresa = async (req, res) => {
     res.status(200).json({ message: "Empresa eliminada exitosamente" });
   } catch (error) {
     res.status(500).json({ message: "Error al eliminar la empresa", error });
+  }
+};
+
+// Enviar correo
+exports.sendEmail = async (req, res) => {
+  const { recipientEmail, subject, message } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "santiagotomasperron2001@gmail.com",
+      pass: "cgyk udxs rfmo bcue",
+    },
+  });
+
+  const mailOptions = {
+    from: "santiagotomasperron2001@gmail.com",
+    to: recipientEmail,
+    subject: subject,
+    html: `<h1>¡Hola!</h1><p>${message}</p>`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res
+      .status(200)
+      .json({ success: true, message: "Correo enviado correctamente" });
+  } catch (error) {
+    console.error("Error enviando el correo: ", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Error enviando el correo", error });
   }
 };

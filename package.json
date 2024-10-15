@@ -20,10 +20,13 @@
   "homepage": "https://github.com/STPR2001/PhishingSimulation#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongodb": "^6.8.0",
     "mongoose": "^7.4.3",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5"
+    "nodemailer": "^6.9.15",
+    "jsonwebtoken": "^7.4.3",
+    "bcryptjs": "^2.4.3"
   }
 }

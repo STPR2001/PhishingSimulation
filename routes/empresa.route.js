@@ -7,5 +7,6 @@ router.get("/empresas", empresaController.getEmpresas);
 router.get("/empresas/:id", empresaController.getEmpresaById);
 router.put("/empresas/:id", empresaController.updateEmpresa);
 router.delete("/empresas/:id", empresaController.deleteEmpresa);
+router.post("/sendEmail", empresaController.sendEmail);
 
 module.exports = router;
