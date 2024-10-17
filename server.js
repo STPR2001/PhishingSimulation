@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/usuario.route");
 const empresaRoutes = require("./routes/empresa.route");
+const correoRoutes = require("./routes/correo.route");
 const auth = require("./routes/auth.route");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
@@ -20,12 +21,15 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
+app.use(express.static(path.join(__dirname, "views")));
+
 app.use(express.urlencoded({ extended: true }));
 
 // Rutas
 app.use("/api/usuario", userRoutes); // Rutas para usuarios
 app.use("/api/empresa", empresaRoutes); // Rutas para empresas
 app.use("/api/auth", auth);
+app.use("/api/correo", correoRoutes);
 
 // Middleware para manejar rutas no encontradas
 app.use((req, res, next) => {
@@ -38,11 +42,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Error interno del servidor" });
 });
 
-//NO REDIRIGE BIEN!!!
-app.use(express.static(path.join(__dirname, "views")));
-//redirigir a login
 app.get("/", function (req, res, next) {
-  res.sendFile(__dirname + "/views/index.html");
+  res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
 // Iniciar el servidor

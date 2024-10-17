@@ -4,17 +4,14 @@ const Usuario = require("../models/usuario");
 // Crear un nuevo usuario
 exports.createUser = async (req, res) => {
   try {
-    const { nombre, apellido, correo } = req.body;
-
-    const usuario = new Usuario({
+    let usuario = new Usuario({
       _id: new mongoose.Types.ObjectId(),
-      nombre,
-      apellido,
-      correo,
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      correo: req.body.correo,
     });
-
-    const savedUser = await usuario.save();
-    res.status(201).json(savedUser);
+    await usuario.save();
+    res.status(201).json({ message: "Usuario creado con éxito" }); // Respuesta correcta
   } catch (error) {
     res.status(500).json({ message: "Error al crear el usuario", error });
   }

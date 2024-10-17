@@ -3,76 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Simphishing - Simulador de Phishing</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
     <style>
       body {
-        background-color: #f7f9fc;
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+        color: #fff;
+      }
+      header {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        height: 100vh;
+        padding: 20px;
+        background-color: #000;
       }
-      .login-container {
-        background-color: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      header .logo {
+        display: flex;
+        align-items: center;
       }
-      .form-control:focus {
-        box-shadow: none;
-        border-color: #007bff;
+      header .logo img {
+        height: 40px;
+        margin-right: 10px;
       }
-      .btn-custom {
-        background-color: #007bff;
-        color: white;
+      nav a {
+        color: #fff;
+        margin-right: 20px;
+        text-decoration: none;
+        font-weight: 400;
       }
-      .btn-custom:hover {
-        background-color: #0056b3;
+      nav a:hover {
+        color: #ffde00;
       }
-      .error-message {
-        display: none;
-        color: red;
-        margin-top: 10px;
+      .active {
+        color: #ffde00;
+      }
+      .hero {
+        text-align: center;
+        padding: 100px 20px;
+        background-color: #000;
+      }
+      .hero h1 {
+        font-size: 48px;
+        font-weight: 700;
+      }
+      .hero p {
+        font-size: 18px;
+        margin: 20px 0;
+      }
+      .hero .btn {
+        background-color: #ffde00;
+        color: #000;
+        padding: 15px 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .hero .btn:hover {
+        background-color: #fff200;
+      }
+      .hero img {
+        margin-top: 40px;
+        height: 200px;
       }
     </style>
   </head>
   <body>
-    <div class="login-container">
-      <h2 class="text-center mb-4">Iniciar Sesión</h2>
-      <form id="login-form">
-        <div class="mb-3">
-          <label for="email" class="form-label">Correo Electrónico</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            placeholder="Introduce tu correo"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Contraseña</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            placeholder="Introduce tu contraseña"
-            required
-          />
-        </div>
-        <div class="error-message" id="error-message"></div>
-        <button type="submit" class="btn btn-custom w-100">Ingresar</button>
-        <div class="text-center mt-3">
-          <a href="#">¿Olvidaste tu contraseña?</a>
-        </div>
-      </form>
-    </div>
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="Simphishing Logo" />
+        <h2>SIMPHISHING</h2>
+      </div>
+      <nav>
+        <a href="#" class="active">INICIO</a>
+        <a href="/registro/registro.html">REGISTRO</a>
+        <a href="/login/login.html">LOGIN ADMIN</a>
+      </nav>
+    </header>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="index.js"></script>
+    <section class="hero">
+      <p>A TU ALCANCE</p>
+      <h1>SIMULADOR DE PHISHING</h1>
+      <p>
+        Regístrate para entrenar tus habilidades de pensamiento crítico frente a
+        correos maliciosos.
+      </p>
+      <a href="/registro/registro.html" class="btn">DESCÚBRELO</a>
+      <img src="email-hook.png" alt="Phishing illustration" />
+    </section>
   </body>
 </html>
