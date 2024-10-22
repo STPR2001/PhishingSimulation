@@ -33,7 +33,7 @@ document
       // Guarda el token en localStorage o sessionStorage
       //localStorage.setItem("authToken", token);
 
-      window.location.href = "/lobbyAdmin/lobbyAdmin.html";
+      window.location.href = "/admin/admin.html";
       // Aquí puedes manejar lo que sucede después del login, sin redirección automática
     } catch (error) {
       // Muestra el error en la página
