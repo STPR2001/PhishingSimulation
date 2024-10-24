@@ -97,7 +97,7 @@ exports.deleteEmpresa = async (req, res) => {
     res.status(500).json({ message: "Error al eliminar la empresa", error });
   }
 };
-
+/*
 // Enviar correo
 exports.sendEmail = async (req, res) => {
   const { recipientEmail, subject, message } = req.body;
@@ -127,5 +127,43 @@ exports.sendEmail = async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Error enviando el correo", error });
+  }
+};
+*/
+
+exports.sendMultipleEmails = async (req, res) => {
+  const { recipientEmails, subject, message } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "santiagotomasperron2001@gmail.com",
+      pass: "cgyk udxs rfmo bcue",
+    },
+  });
+
+  try {
+    const mailOptions = recipientEmails.map((email) => ({
+      from: "santiagotomasperron2001@gmail.com",
+      to: email,
+      subject: subject,
+      html: `<p>${message}</p>`,
+    }));
+
+    for (const mailOption of mailOptions) {
+      await transporter.sendMail(mailOption);
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `Correos enviados correctamente a: ${recipientEmails.join(
+        ", "
+      )}`,
+    });
+  } catch (error) {
+    console.error("Error enviando los correos: ", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Error enviando los correos", error });
   }
 };

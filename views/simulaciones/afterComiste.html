@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concientización sobre Phishing</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Asumiendo que tienes un archivo CSS para mantener el diseño -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .phishing-alert {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 600px;
+      }
+      .phishing-alert h1 {
+        color: #d9534f;
+        font-size: 28px;
+      }
+      .phishing-alert p {
+        color: #333;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+      .phishing-alert img {
+        max-width: 100px;
+        margin-bottom: 20px;
+      }
+      .phishing-alert .btn {
+        background-color: #5cb85c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      .phishing-alert .btn:hover {
+        background-color: #4cae4c;
+      }
+      footer {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        color: #777;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="phishing-alert">
+      <h1>¡Atención! Has sido redirigido a esta página por seguridad.</h1>
+      <p>
+        Ingresaste tus credenciales en una página diseñada para simular un
+        ataque de phishing. Este es un intento de mostrarte lo fácil que es caer
+        en estos ataques si no se tiene cuidado.
+      </p>
+      <p>
+        <strong>¿Qué es el phishing?</strong> <br />
+        El phishing es un método fraudulento utilizado por ciberdelincuentes
+        para robar información confidencial, como contraseñas o detalles
+        bancarios, haciéndose pasar por una entidad legítima.
+      </p>
+      <p>
+        <strong>¿Cómo protegerte?</strong> <br />
+        Nunca ingreses tus credenciales en sitios sospechosos. Verifica siempre
+        la URL y asegúrate de que uses conexiones seguras (HTTPS). Desconfía de
+        los correos que te pidan información sensible de manera urgente.
+      </p>
+      <button
+        class="btn"
+        onclick="window.location.href='http://localhost:3000/';"
+      >
+        Volver al inicio
+      </button>
+    </div>
+    <footer>&copy; 2024 UTEC - Tecnólogo en informática.</footer>
+  </body>
+</html>
