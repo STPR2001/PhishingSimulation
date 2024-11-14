@@ -46,28 +46,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const addDeleteButtonListeners = () => {
+    document.querySelectorAll(".delete-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const emailId = button.getAttribute("data-id");
+        deleteEmail(emailId);
+      });
+    });
+  };
+
   const renderEmails = () => {
     emailList.innerHTML = "";
     emails.forEach((email) => {
-      const message = email.contenido
-        ? email.contenido
-        : "Mensaje no disponible";
       const id = email._id;
-      const truncatedMessage =
-        message.length > 50 ? message.slice(0, 50) + "..." : message;
 
       const row = document.createElement("tr");
       row.innerHTML = `
-              <td>${email.asunto || "Sin asunto"}</td>
-              <td>${truncatedMessage}</td>
-              <td>
-                <button class="btn btn-sm btn-success" onclick="prepareEmailToSend('${id}')" data-bs-toggle="modal" data-bs-target="#sendModal">Enviar</button>
-                <button class="btn btn-sm btn-warning" onclick="viewEmailDetail('${id}')" data-bs-toggle="modal" data-bs-target="#detailModal">Ver</button>
-                <button class="btn btn-sm btn-danger">Eliminar</button>
-              </td>
-            `;
+      <td>${email.asunto || "Sin asunto"}</td>
+      <td>
+        <button class="btn btn-sm btn-success" onclick="prepareEmailToSend('${id}')" data-bs-toggle="modal" data-bs-target="#sendModal" style="margin-right: 10px">Enviar correo</button>
+        <button class="btn btn-sm btn-primary" onclick="viewEmailDetail('${id}')" data-bs-toggle="modal" data-bs-target="#detailModal" style="margin-right: 10px">Ver detalle</button>
+        <button class="btn btn-sm btn-danger delete-button" data-id="${id}">Eliminar correo</button>
+      </td>
+    `;
       emailList.appendChild(row);
     });
+
+    addDeleteButtonListeners();
   };
 
   const renderUsers = () => {
@@ -124,14 +129,46 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.viewEmailDetail = (emailId) => {
+    const email = emails.find((email) => email._id === emailId);
+    if (!email) return;
+
+    // Crear una nueva ventana
+    const detailWindow = window.open("", "_blank");
+
+    // Configurar el contenido HTML de la nueva ventana
+    detailWindow.document.write(`
+    <html>
+      <head>
+        <title>${email.asunto || "Detalle del correo"}</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; background-color: #121212 !important;}
+          .asdasd {font-size: 1.5em; color: white !important; text-align: center; padding:20px !important;}
+          .a1a1 {color: white !important; text-align: center;}
+          p { font-size: 1em; }
+        </style>
+      </head>
+      <body>
+        <h1 class="asdasd">Asunto: ${email.asunto || "Sin asunto"}</h1>
+        <p class="a1a1">${email.contenido || "Mensaje no disponible"}</p>
+      </body>
+    </html>
+  `);
+
+    // Cerrar el documento para terminar de cargar la página
+    detailWindow.document.close();
+  };
+
+  /*
+  window.viewEmailDetail = (emailId) => {
     console.log(emailId);
     const email = emails.find((email) => email._id === emailId);
     console.log(email);
     if (!email) return;
 
     document.getElementById("detailSubject").textContent = email.asunto;
-    document.getElementById("detailMessage").textContent = email.contenido;
+    document.getElementById("detailMessage").innerHTML = email.contenido;
   };
+  */
 
   // Preparar el correo para enviar
   window.prepareEmailToSend = (emailId) => {
@@ -189,6 +226,31 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Error al enviar los correos");
     }
   });
+
+  const deleteEmail = async (emailId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/correo/correos/${emailId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al eliminar el correo");
+      }
+
+      // Actualizar la lista de correos después de eliminar
+      emails = emails.filter((email) => email._id !== emailId);
+      renderEmails();
+    } catch (error) {
+      console.error("Error al eliminar el correo:", error);
+      alert("Error al eliminar el correo");
+    }
+  };
 
   fetchEmails();
 });

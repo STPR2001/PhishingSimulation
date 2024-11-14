@@ -15,6 +15,7 @@ h1 {
 
 .btn-warning:hover {
   background-color: #e5e500;
+  color: black !important;
 }
 
 .table-dark {
@@ -51,4 +52,5 @@ h1 {
 
 .modal-footer button:hover {
   background-color: #e5e500;
+  color: black;
 }
